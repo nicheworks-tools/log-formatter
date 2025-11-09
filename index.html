@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>地味ログ整形屋（LogFormatter） - NicheWorks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Nginxアクセスログやアプリケーションログをブラウザ内だけで整形・検索するためのシンプルなログビューア。ログは送信されません。"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 共通ヘッダー（NicheWorks方針に合わせた簡素版） -->
+  <header class="nw-header">
+    <div class="nw-header-inner">
+      <h1 class="nw-title">地味ログ整形屋（LogFormatter）</h1>
+      <p class="nw-subtitle">
+        Nginxアクセスログなどの生ログを貼るだけで、
+        ブラウザ内で整形・色分け・フィルタ表示するための実務ツール。
+      </p>
+      <p class="notice">
+        このツールはクライアントサイドのみで動作します。
+        入力されたログはサーバーへ送信されません。
+      </p>
+    </div>
+  </header>
+
+  <main class="nw-main">
+    <!-- 上部広告枠（共通仕様） -->
+    <div class="ad-slot ad-top">
+      広告枠（準備中）
+      <!-- 審査通過後に広告コードを挿入 -->
+    </div>
+
+    <!-- ツール固有コンテンツ：LogFormatter 本体 -->
+    <section class="input-panel">
+      <label for="logInput" class="label">ログをここにペースト：</label>
+      <textarea
+        id="logInput"
+        class="log-input"
+        placeholder='例: 192.168.0.1 - - [10/Nov/2025:12:34:56 +0900] "GET /index.html HTTP/1.1" 200 1234 "-" "Mozilla/5.0"'
+      ></textarea>
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="statusFilter">ステータス:</label>
+          <select id="statusFilter">
+            <option value="all">すべて</option>
+            <option value="2xx">2xx</option>
+            <option value="3xx">3xx</option>
+            <option value="4xx">4xx</option>
+            <option value="5xx">5xx</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="textFilter">含む文字列:</label>
+          <input
+            type="text"
+            id="textFilter"
+            placeholder="例: /api /admin など"
+          />
+        </div>
+
+        <div class="control-group">
+          <label for="excludeFilter">除外文字列:</label>
+          <input
+            type="text"
+            id="excludeFilter"
+            placeholder="例: healthcheck"
+          />
+        </div>
+
+        <div class="control-group checkbox-group">
+          <label>
+            <input type="checkbox" id="onlyMatched" />
+            条件に合う行のみ表示
+          </label>
+        </div>
+
+        <button id="formatButton" class="btn-primary">
+          整形して表示
+        </button>
+        <button id="clearButton" class="btn-ghost">
+          クリア
+        </button>
+      </div>
+    </section>
+
+    <section class="output-panel">
+      <div class="output-header">
+        <div class="output-title">整形結果</div>
+        <div class="output-meta">
+          <span id="lineCount">0 行</span>
+          <span id="matchedCount"> / 0 行 該当</span>
+        </div>
+      </div>
+      <div id="logOutput" class="log-output"></div>
+    </section>
+
+    <!-- 下部広告枠（共通仕様 / 必要に応じてオン） -->
+    <div class="ad-slot ad-bottom">
+      広告枠（準備中）
+      <!-- 審査通過後に広告コードを挿入 -->
+    </div>
+  </main>
+
+  <!-- 共通フッター -->
+  <footer class="nw-footer">
+    <p class="nw-footer-line">
+      © NicheWorks — Small Web Tools for Boring Tasks
+    </p>
+    <p class="nw-footer-line">
+      当サイトには広告が含まれる場合があります。掲載情報および整形結果の正確性は保証しません。
+      必要に応じて原本ログや公式ドキュメントを確認してください。
+    </p>
+    <p class="nw-footer-line">
+      <a href="https://nicheworks.pages.dev/" target="_blank" rel="noopener">
+        nicheworks.pages.dev
+      </a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
