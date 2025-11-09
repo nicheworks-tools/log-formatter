@@ -1,0 +1,359 @@
+/* ================================
+ * NicheWorks 共通レイアウト
+ * ============================== */
+
+:root {
+  --bg: #ffffff;
+  --border: #e5e7eb;
+  --border-soft: #f3f4f6;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #111827;
+  --accent-soft: #f9fafb;
+
+  --status-2xx: #16a34a;
+  --status-3xx: #2563eb;
+  --status-4xx: #ea580c;
+  --status-5xx: #b91c1c;
+
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --radius: 4px;
+  --transition: 0.15s ease-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* 共通ヘッダー */
+
+.nw-header {
+  padding: 16px 12px 8px;
+  border-bottom: 1px solid var(--border);
+  background: #ffffff;
+}
+
+.nw-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.nw-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.nw-subtitle {
+  margin: 4px 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.notice {
+  font-size: 11px;
+  color: #374151;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  display: inline-block;
+}
+
+/* 共通メインラッパー */
+
+.nw-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* 広告プレースホルダ（全ツール共通） */
+
+.ad-slot {
+  margin: 12px 0 16px;
+  padding: 8px;
+  border: 1px dashed #d4d4d4;
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+  min-height: 60px;
+}
+
+.ad-top {
+  margin-top: 4px;
+}
+
+.ad-bottom {
+  margin-bottom: 8px;
+}
+
+/* 共通フッター */
+
+.nw-footer {
+  margin-top: 24px;
+  padding: 16px 8px 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 11px;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.nw-footer-line {
+  margin: 2px 0;
+}
+
+.nw-footer a {
+  color: #6b7280;
+  text-decoration: underline;
+}
+
+/* ================================
+ * LogFormatter 固有スタイル
+ * ============================== */
+
+.input-panel,
+.output-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  background: #f9fafb;
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 4px;
+  color: var(--muted);
+}
+
+.log-input {
+  width: 100%;
+  min-height: 140px;
+  max-height: 260px;
+  resize: vertical;
+  padding: 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  outline: none;
+  background: #ffffff;
+}
+
+.log-input:focus {
+  border-color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.control-group label {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.control-group input,
+.control-group select {
+  padding: 4px 6px;
+  font-size: 11px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-family: inherit;
+  outline: none;
+  min-width: 120px;
+  background: #ffffff;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  border-color: var(--accent);
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.checkbox-group label {
+  font-size: 11px;
+  color: var(--text);
+}
+
+.btn-primary,
+.btn-ghost {
+  padding: 6px 10px;
+  font-size: 11px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition),
+    transform var(--transition), border-color var(--transition);
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+}
+
+.btn-ghost:hover {
+  background: #f3f4f6;
+}
+
+/* 出力 */
+
+.output-panel {
+  background: #ffffff;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.output-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.output-meta {
+  font-size: 10px;
+  color: var(--muted);
+  display: flex;
+  gap: 4px;
+}
+
+.log-output {
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+  padding: 6px;
+  background: #fcfcfc;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre;
+}
+
+.log-line {
+  white-space: pre;
+}
+
+.log-line.dim {
+  color: #9ca3af;
+}
+
+.log-line .ip {
+  color: #4b5563;
+}
+
+.log-line .timestamp {
+  color: #7c3aed;
+}
+
+.log-line .method {
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.log-line .url {
+  color: #2563eb;
+}
+
+.log-line .status {
+  font-weight: 600;
+}
+
+.log-line .status-2xx {
+  color: var(--status-2xx);
+}
+
+.log-line .status-3xx {
+  color: var(--status-3xx);
+}
+
+.log-line .status-4xx {
+  color: var(--status-4xx);
+}
+
+.log-line .status-5xx {
+  color: var(--status-5xx);
+}
+
+.log-line .size {
+  color: #6b7280;
+}
+
+.log-line mark {
+  background: #fef9c3;
+  padding: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+  .nw-header {
+    padding: 12px 8px 6px;
+  }
+
+  .nw-main {
+    padding: 10px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .control-group input,
+  .control-group select {
+    min-width: 100%;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    width: auto;
+  }
+}
