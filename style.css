@@ -4,6 +4,7 @@
 
 :root {
   --bg: #ffffff;
+  --bg-soft: #f9fafb;
   --border: #e5e7eb;
   --border-soft: #f3f4f6;
   --text: #111827;
@@ -21,6 +22,26 @@
   --radius: 4px;
   --transition: 0.15s ease-out;
 }
+
+/* ダークモード用（body.dark-mode に付与） */
+
+body.dark-mode {
+  --bg: #020817;
+  --bg-soft: #020817;
+  --border: #111827;
+  --border-soft: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #e5e7eb;
+  --accent-soft: #030712;
+
+  --status-2xx: #22c55e;
+  --status-3xx: #60a5fa;
+  --status-4xx: #fb923c;
+  --status-5xx: #f87171;
+}
+
+/* base */
 
 *,
 *::before,
@@ -42,7 +63,7 @@ body {
 .nw-header {
   padding: 16px 12px 8px;
   border-bottom: 1px solid var(--border);
-  background: #ffffff;
+  background: var(--bg);
 }
 
 .nw-header-inner {
@@ -65,7 +86,7 @@ body {
 
 .notice {
   font-size: 11px;
-  color: #374151;
+  color: var(--text);
   padding: 6px 8px;
   border-radius: var(--radius);
   background: var(--accent-soft);
@@ -81,16 +102,21 @@ body {
   padding: 12px;
 }
 
-/* 広告プレースホルダ（全ツール共通） */
+/* 広告プレースホルダ */
 
 .ad-slot {
   margin: 12px 0 16px;
   padding: 8px;
-  border: 1px dashed #d4d4d4;
+  border: 1px dashed #4b5563;
   font-size: 11px;
-  color: #9ca3af;
+  color: #6b7280;
   text-align: center;
-  min-height: 60px;
+  min-height: 40px;
+}
+
+body.dark-mode .ad-slot {
+  border-color: #374151;
+  color: #6b7280;
 }
 
 .ad-top {
@@ -106,9 +132,9 @@ body {
 .nw-footer {
   margin-top: 24px;
   padding: 16px 8px 12px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border);
   font-size: 11px;
-  color: #6b7280;
+  color: var(--muted);
   text-align: center;
   line-height: 1.6;
 }
@@ -118,7 +144,7 @@ body {
 }
 
 .nw-footer a {
-  color: #6b7280;
+  color: var(--muted);
   text-decoration: underline;
 }
 
@@ -131,8 +157,21 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 10px;
-  background: #f9fafb;
+  background: var(--bg-soft);
   margin-bottom: 10px;
+}
+
+.input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .label {
@@ -148,6 +187,7 @@ body {
   max-height: 260px;
   resize: vertical;
   padding: 8px;
+  margin-top: 4px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   font-family: var(--font-mono);
@@ -155,6 +195,13 @@ body {
   line-height: 1.5;
   outline: none;
   background: #ffffff;
+  color: #111827;
+}
+
+body.dark-mode .log-input {
+  background: #020817;
+  color: #e5e7eb;
+  border-color: #111827;
 }
 
 .log-input:focus {
@@ -191,6 +238,14 @@ body {
   outline: none;
   min-width: 120px;
   background: #ffffff;
+  color: #111827;
+}
+
+body.dark-mode .control-group input,
+body.dark-mode .control-group select {
+  background: #020817;
+  color: #e5e7eb;
+  border-color: #111827;
 }
 
 .control-group input:focus,
@@ -209,17 +264,25 @@ body {
   color: var(--text);
 }
 
+/* ボタン */
+
 .btn-primary,
-.btn-ghost {
+.btn-ghost,
+.btn-xs {
   padding: 6px 10px;
   font-size: 11px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: #ffffff;
+  background: transparent;
   cursor: pointer;
   transition: background var(--transition), box-shadow var(--transition),
-    transform var(--transition), border-color var(--transition);
+    transform var(--transition), border-color var(--transition), color var(--transition);
   font-family: inherit;
+}
+
+.btn-xs {
+  padding: 4px 8px;
+  font-size: 10px;
 }
 
 .btn-primary {
@@ -234,14 +297,30 @@ body {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
 }
 
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+}
+
 .btn-ghost:hover {
-  background: #f3f4f6;
+  background: var(--border-soft);
+  color: var(--text);
+}
+
+/* ダークモードトグル */
+
+.toggle-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--muted);
 }
 
 /* 出力 */
 
 .output-panel {
-  background: #ffffff;
+  background: var(--bg);
 }
 
 .output-header {
@@ -275,6 +354,13 @@ body {
   max-height: 420px;
   overflow: auto;
   white-space: pre;
+  color: #111827;
+}
+
+body.dark-mode .log-output {
+  background: #020817;
+  color: #e5e7eb;
+  border-color: #111827;
 }
 
 .log-line {
@@ -283,6 +369,10 @@ body {
 
 .log-line.dim {
   color: #9ca3af;
+}
+
+body.dark-mode .log-line.dim {
+  color: #4b5563;
 }
 
 .log-line .ip {
@@ -331,6 +421,12 @@ body {
   padding: 0;
 }
 
+/* system message line */
+.log-line.system {
+  color: #6b7280;
+  font-style: italic;
+}
+
 /* Responsive */
 
 @media (max-width: 720px) {
@@ -342,6 +438,12 @@ body {
     padding: 10px;
   }
 
+  .input-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
   .controls {
     flex-direction: column;
     align-items: flex-start;
@@ -350,10 +452,5 @@ body {
   .control-group input,
   .control-group select {
     min-width: 100%;
-  }
-
-  .btn-primary,
-  .btn-ghost {
-    width: auto;
   }
 }
