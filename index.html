@@ -6,36 +6,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content="Nginxアクセスログやアプリケーションログをブラウザ内だけで整形・検索するためのシンプルなログビューア。ログは送信されません。"
+    content="Nginx / Apache / JSON Lines などのテキストログをブラウザ内だけで整形・検索するログビューア。ログは送信されません。"
   />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 共通ヘッダー（NicheWorks方針に合わせた簡素版） -->
+  <!-- 共通ヘッダー -->
   <header class="nw-header">
     <div class="nw-header-inner">
       <h1 class="nw-title">地味ログ整形屋（LogFormatter）</h1>
       <p class="nw-subtitle">
-        Nginxアクセスログなどの生ログを貼るだけで、
+        Nginx / Apache / JSON Lines / プレーンテキストの長いログを、
         ブラウザ内で整形・色分け・フィルタ表示するための実務ツール。
       </p>
       <p class="notice">
         このツールは JavaScript のみで動作し、入力されたログはネットワーク送信されません。
-  　　　 機密ログもブラウザ内でのみ処理されます。
+        機密ログもブラウザ内でのみ処理されます。
       </p>
     </div>
   </header>
 
   <main class="nw-main">
-    <!-- 上部広告枠（共通仕様） -->
+    <!-- 上部広告枠 -->
     <div class="ad-slot ad-top">
       広告枠（準備中）
       <!-- 審査通過後に広告コードを挿入 -->
     </div>
 
-    <!-- ツール固有コンテンツ：LogFormatter 本体 -->
+    <!-- ツール本体 -->
     <section class="input-panel">
-      <label for="logInput" class="label">ログをここにペースト：</label>
+      <div class="input-header">
+        <label for="logInput" class="label">ログをここにペースト：</label>
+        <div class="input-actions">
+          <button id="sampleButton" class="btn-ghost btn-xs">
+            サンプルログを入れる
+          </button>
+          <label class="toggle-dark">
+            <input type="checkbox" id="darkModeToggle" />
+            ダークモード
+          </label>
+        </div>
+      </div>
+
       <textarea
         id="logInput"
         class="log-input"
@@ -43,6 +55,16 @@
       ></textarea>
 
       <div class="controls">
+        <div class="control-group">
+          <label for="formatSelect">ログ形式:</label>
+          <select id="formatSelect">
+            <option value="nginx">Nginx</option>
+            <option value="apache">Apache</option>
+            <option value="jsonl">JSON Lines</option>
+            <option value="plain">プレーンテキスト</option>
+          </select>
+        </div>
+
         <div class="control-group">
           <label for="statusFilter">ステータス:</label>
           <select id="statusFilter">
@@ -55,20 +77,20 @@
         </div>
 
         <div class="control-group">
-          <label for="textFilter">含む文字列:</label>
+          <label for="textFilter">含めるキーワード（スペース区切り可）:</label>
           <input
             type="text"
             id="textFilter"
-            placeholder="例: /api /admin など"
+            placeholder="例: error timeout /api"
           />
         </div>
 
         <div class="control-group">
-          <label for="excludeFilter">除外文字列:</label>
+          <label for="excludeFilter">除外キーワード（スペース区切り可）:</label>
           <input
             type="text"
             id="excludeFilter"
-            placeholder="例: healthcheck"
+            placeholder="例: healthcheck metrics"
           />
         </div>
 
@@ -99,7 +121,7 @@
       <div id="logOutput" class="log-output"></div>
     </section>
 
-    <!-- 下部広告枠（共通仕様 / 必要に応じてオン） -->
+    <!-- 下部広告枠 -->
     <div class="ad-slot ad-bottom">
       広告枠（準備中）
       <!-- 審査通過後に広告コードを挿入 -->
